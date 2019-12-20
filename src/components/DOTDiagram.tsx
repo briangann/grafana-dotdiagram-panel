@@ -151,7 +151,7 @@ class DOTDiagram extends React.Component<any, any, Props2> {
     console.log(this.svg);
     //let width = this.div.node().parentElement.clientWidth;
     //let height = this.div.node().parentElement.clientHeight;
-    console.log('setting viewbox');
+    console.log('setting ViewBox');
 
     try {
       const mysvg = d3.select(this.props.chartContainer.childNodes[0]);
