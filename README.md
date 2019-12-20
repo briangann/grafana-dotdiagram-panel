@@ -8,6 +8,8 @@
 
 # Screenshots
 
+![Panel Example](https://raw.githubusercontent.com/briangann/grafana-dotdiagram-panel/master/src/screenshots/panel-example.png)
+
 # Configuration Editor
 
 # Overrides
