@@ -1,0 +1,34 @@
+<div class="editor-row">
+	<div class="section gf-form-group">
+    <h5 class="section-heading">Diagram Definition</h5>
+
+    convert this to a checkbox that hides/shows url or content
+    <label>
+      <input type="radio" ng-model="ctrl.panel.diagram.useRemoteURL" value="url" ng-change="ctrl.refresh()"> Remote URL
+    </label>
+  
+    <span> URL to retrieve a text/plain response containing DOT notation</span>
+
+    <input type="text" 
+    	style="width: 100%" 
+	    ng-model="ctrl.panel.diagram.remoteURL" 
+	    ng-change="ctrl.refresh()"
+	    ng-model-onblur/>
+    
+    <label>
+      <input type="radio" 
+	      ng-model="ctrl.panel.diagram.useRemoteURL" 
+        ng-change="ctrl.refresh()"
+        value="content"> Content
+    </label>
+  
+    <span>
+      (This area uses
+      <a target="_blank" href="https://graphviz.gitlab.io/_pages/doc/info/lang.html/">DOT Notation</a>.)
+      <a target="_blank" href="http://www.graphviz.org/pdf/dotguide.pdf">PDF</a>
+    </span>
+    <div class="gf-form">
+      <textarea class="gf-form-input" ng-model="ctrl.panel.diagram.dotContent" rows="25" spellcheck="false"
+        style="width: 100%" ng-change="ctrl.refresh()" ng-model-onblur>
+      </textarea>
+    </div>

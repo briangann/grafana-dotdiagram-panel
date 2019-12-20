@@ -1,0 +1,6 @@
+@import '../../node_modules/@grafana/toolkit/sass/_variables.light.scss';
+@import 'dot-diagram';
+
+.dotdiagram-panel-tooltip p {
+  margin: 1;
+}

@@ -1,0 +1,38 @@
+@import '../../node_modules/@grafana/toolkit/sass/_variables.dark.scss';
+@import 'dot-diagram';
+
+.dotdiagram-panel-tooltip p {
+  margin: 0;
+}
+
+.node rect {
+  cursor: move;
+  fill-opacity: 0.9;
+  shape-rendering: crispEdges;
+}
+
+*[id^='container_d3_svg'] text,
+title {
+  pointer-events: none;
+  fill: white;
+}
+#container_d3_svg_x text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+  fill: green;
+}
+#container_d3_svg_x title {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+  fill: blue;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: 0.2;
+}
+
+.link:hover {
+  stroke-opacity: 0.5;
+}

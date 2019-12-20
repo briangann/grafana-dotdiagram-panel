@@ -1,0 +1,97 @@
+<div class="editor-row">
+	<div class="section gf-form-group">
+    <h5 class="section-heading">Display Settings</h5>
+        <div class="gf-form">
+          <label class="gf-form-label width-11">Edge Color
+            <tip>Edge Color</tip>
+          </label>
+          <div class="gf-form-select-wrapper width-12">
+            <select
+              class="gf-form-input"
+              ng-model="ctrl.panel.diagram.edgeColor"
+              ng-options="f.value as f.text for f in ctrl.edgeColorOptions"
+              ng-change="ctrl.refresh()">
+            </select>
+          </div>
+        </div>
+
+    <div class="gf-form-inline">
+      <div class="gf-form">
+        <label class="gf-form-label width-11">Font Size
+          <tip>Font Size</tip>
+        </label>
+        <div class="gf-form-select-wrapper width-6">
+          <select class="gf-form-input" ng-model="ctrl.panel.diagram.fontSize" ng-options="f for f in ctrl.fontSizes"
+            ng-change="ctrl.refresh()">
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="gf-form-inline">
+      <div class="gf-form">
+        <label class="gf-form-label width-11">Label Font Color</label>
+        <span class="gf-form-label">
+          <spectrum-picker ng-model="ctrl.panel.diagram.labelColor" ng-change="ctrl.refresh()"></spectrum-picker>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="editor-row">
+    <div class="section gf-form-group">
+      <h5 class="section-heading">Node Settings</h5>
+        <div class="gf-form-inline">
+          <label class="gf-form-label width-10">Node Alignment
+            <tip>Alignment</tip>
+          </label>
+          <div class="gf-form-select-wrapper width-12">
+            <select
+              class="gf-form-input"
+              ng-model="ctrl.panel.diagram.nodeAlignment"
+              ng-options="f.value as f.text for f  in ctrl.nodeAlignmentOptions"
+              ng-change="ctrl.refresh()">
+            </select>
+          </div>
+        </div>
+        <div class="gf-form-inline">
+          <label class="gf-form-label width-10">Node Width
+            <tip>Thickness of node</tip>
+          </label>
+          <input type="number" class="gf-form-input width-8" ng-model="ctrl.panel.diagram.nodeWidth" ng-blur="ctrl.validateNodeWidth()" placeholder="15"/>
+        </div>
+        <div class="gf-form-inline">
+          <label class="gf-form-label width-10">Node Padding
+            <tip>Space between nodes</tip>
+          </label>
+          <input type="number" class="gf-form-input width-8" ng-model="ctrl.panel.diagram.nodePadding" ng-blur="ctrl.validateNodePadding()" placeholder="8"/>
+        </div>
+    </div>
+</div>
+
+<div class="editor-row">
+	<div class="section gf-form-group">
+    <h5 class="section-heading">Global</h5>
+    <div class="gf-form">
+      <label class="gf-form-label width-11">Global Unit</label>
+      <div class="gf-form">
+        <div class="gf-form-dropdown-typeahead width-13 max-width-20"
+             ng-model="ctrl.panel.diagram.globalUnitFormat" dropdown-typeahead2="ctrl.unitFormats"
+             dropdown-typeahead-on-select="ctrl.setGlobalUnitFormat($subItem)">
+        </div>
+      </div>
+      <div class="gf-form">
+        <label class="gf-form-label width-11">Global Decimals</label>
+        <input type="number" class="gf-form-input width-4" placeholder="auto"
+               data-placement="right" ng-model="ctrl.panel.diagram.globalDecimals" ng-change="ctrl.refresh()"
+               ng-model-onblur>
+      </div>
+      <div class="gf-form">
+        <label class="gf-form-label width-11">Stat</label>
+        <div class="gf-form-select-wrapper width-13">
+          <select class="gf-form-input" ng-model="ctrl.panel.diagram.globalOperatorName" ng-options="f.value as f.text for f in ctrl.operatorOptions"
+              ng-change="ctrl.refresh()"></select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

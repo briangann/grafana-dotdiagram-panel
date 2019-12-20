@@ -1,0 +1,23 @@
+@import '../../node_modules/@grafana/toolkit/sass/_variables.scss';
+
+.node rect {
+  cursor: move;
+  fill-opacity: 0.9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+  color: green;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: 0.2;
+}
+
+.link:hover {
+  stroke-opacity: 0.5;
+}
