@@ -23,7 +23,7 @@
             },
             {
                 "name": "Apache-2.0",
-                "url": "https://github.com/briangann/grafana-dotdiagram-panel/blob/master/LICENSE.md"
+                "url": "https://github.com/briangann/grafana-dotdiagram-panel/blob/master/LICENSE"
             }
         ],
         "screenshots": [
