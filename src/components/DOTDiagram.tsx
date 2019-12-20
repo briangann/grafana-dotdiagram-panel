@@ -28,7 +28,7 @@ class DOTDiagram extends React.Component<any, any, Props2> {
     this.color = d3.scaleOrdinal(d3.schemeCategory10);
     console.log('making worker...');
     this.worker = this.props.aWorker;
-    //this.worker = new Worker("public/plugins/briangann-dotdiagram-panel/lib/full.render.js");
+    //this.worker = new Worker("public/plugins/briangann-dotdiagram-panel/libs/full.render.js");
     //this.worker = null;
 
     this.renderD3 = this.renderD3.bind(this);
@@ -98,9 +98,9 @@ class DOTDiagram extends React.Component<any, any, Props2> {
     // ========================================================================
     // Initialize and append the svg canvas to faux-DOM
     // ========================================================================
-    //let worker = new Worker("public/plugins/briangann-dotdiagram-panel/lib/full.render.js");
+    //let worker = new Worker("public/plugins/briangann-dotdiagram-panel/libs/full.render.js");
     //if (this.worker === null) {
-    //  this.worker = new Worker("public/plugins/briangann-dotdiagram-panel/lib/full.render.js");
+    //  this.worker = new Worker("public/plugins/briangann-dotdiagram-panel/libs/full.render.js");
     // }
     const thisRef = this;
     //let workerRef = this.worker;

@@ -156,7 +156,7 @@ class DOTDiagramPanelCtrl extends MetricsPanelCtrl {
     // merge existing settings with our defaults
     _.defaults(this.panel, this.panelDefaults);
     // share the renderer otherwise multiple get created and not destroyed
-    this.aWorker = new Worker('public/plugins/briangann-dotdiagram-panel/lib/full211.render.js');
+    this.aWorker = new Worker('public/plugins/briangann-dotdiagram-panel/libs/full211.render.js');
 
     this.containerId = 'container_d3_svg_' + this.panel.id;
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
