@@ -36,7 +36,7 @@ jobs:
         - yarn-packages-{{ checksum "yarn.lock" }}
     - run:
         name: Initialize CI
-        command: mkdir ci # Avoid error if not exists
+        command: mkdir -p ci # Avoid error if not exists
     - run:
         name: Build Docs
         command: npx grafana-toolkit plugin:ci-docs
