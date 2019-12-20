@@ -98,7 +98,7 @@ class DOTDiagram extends React.Component<any, any, Props2> {
     // ========================================================================
     // Initialize and append the svg canvas to faux-DOM
     // ========================================================================
-    //let xworker = new Worker("public/plugins/briangann-dotdiagram-panel/lib/full.render.js");
+    //let worker = new Worker("public/plugins/briangann-dotdiagram-panel/lib/full.render.js");
     //if (this.worker === null) {
     //  this.worker = new Worker("public/plugins/briangann-dotdiagram-panel/lib/full.render.js");
     // }
