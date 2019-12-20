@@ -2,9 +2,9 @@ import React from 'react';
 //import ReactDOM from 'react-dom';
 import { withFauxDOM } from 'react-faux-dom';
 // @ts-ignore
-import viz from '../lib/viz211.js';
+import viz from '../libs/viz211.js';
 // @ts-ignore
-import * as d3 from '../lib/d3.v5.min';
+import * as d3 from '../libs/d3.v5.min';
 import { select as d3_select } from 'd3-selection';
 
 import _ from 'lodash';
