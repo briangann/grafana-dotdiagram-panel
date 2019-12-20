@@ -1,0 +1,48 @@
+{
+  "name": "briangann-dotdiagram-panel",
+  "private": true,
+  "version": "1.0.0",
+  "description": "DOT Diagram Panel",
+  "main": "module.js",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/briangann/grafana-dotdiagram-panel.git"
+  },
+  "author": "Brian Gann",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/briangann/grafana-dotdiagram-panel/issues"
+  },
+  "devDependencies": {
+    "@grafana/toolkit": "next",
+    "@grafana/ui": "next",
+    "@types/angular": "^1.6.57",
+    "@types/d3": "^5.7.2",
+    "@types/d3-graphviz": "^2.6.2",
+    "@types/grafana": "github:CorpGlory/types-grafana",
+    "@types/jquery": "^3.3.31",
+    "@types/lodash": "^4.14.149",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-faux-dom": "^4.1.3",
+    "grafana-sdk-mocks": "github:grafana/grafana-sdk-mocks",
+    "node-sass": "^4.13.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-faux-dom": "^4.5.0",
+    "react-motion": "^0.5.2",
+    "react-vis": "^1.11.7"
+  },
+  "dependencies": {
+    "d3": "^5.14.2",
+    "viz.js": "^2.1.2"
+  },
+  "homepage": "https://github.com/briangann/grafana-dotdiagram-panel"
+}
