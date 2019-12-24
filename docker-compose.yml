@@ -1,5 +1,5 @@
 grafana:
-  image: grafana/grafana:latest
+  image: grafana/grafana:dev
   ports:
     - "3000:3000"
   volumes:
@@ -7,3 +7,5 @@ grafana:
     - ./provisioning:/etc/grafana/provisioning
   environment:
     - TERM=linux
+    - GF_LOG_LEVEL=debug
+    - GF_DATAPROXY_LOGGING=true
