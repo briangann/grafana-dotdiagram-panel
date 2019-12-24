@@ -1,34 +1,18 @@
 import React, { PureComponent } from 'react';
-import _ from 'lodash';
 import { Select } from '@grafana/ui';
-//import { PanelEditorProps } from '@grafana/data';
-import { PanelEditorProps, SelectableValue } from '@grafana/data';
+import { PanelEditorProps } from '@grafana/data';
+import { SelectableValue } from '@grafana/data';
 
-import { DOTDiagramOptions, defaults, DOTDiagramState ,stateDefaults, fontSizes } from './types';
+import { fontSizes } from './types';
+import { DOTDiagramOptions } from './editorOptions';
 
-/*
-export interface EditorState {
-  fontSize: SelectableValue<string>;
-}
-
-const stateDefaults: EditorState = {
-  fontSize: fontSizes[0],
-};
-*/
 
 export class DOTDiagramEditor extends PureComponent<PanelEditorProps<DOTDiagramOptions>> {
   constructor(props: any) {
     super(props);
-    this.state = _.defaultsDeep(this.props.options, defaults);
   }
 
   onFontSizeChanged = (value: SelectableValue<string>) => {
-    /*
-    this.setState({
-      fontSize: value,
-    });
-    console.log("state = " + JSON.stringify(this.state));
-    */
     this.props.onOptionsChange({ ...this.props.options, fontSize: value });
   };
 

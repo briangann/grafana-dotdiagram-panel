@@ -37,23 +37,3 @@ export const operatorOptions: Array<SelectableValue<string>> = [
 ];
 
 export const unitFormats: Array<SelectableValue<string>> = kbn.getUnitFormats();
-
-export interface DOTDiagramOptions {
-  fontSizes: Array<SelectableValue<string>>;
-  unitFormats: Array<SelectableValue<string>>;
-}
-
-export const defaults: DOTDiagramOptions = {
-  fontSizes: fontSizes,
-  unitFormats: unitFormats
-};
-
-export interface DOTDiagramState {
-  fontSize: SelectableValue<string>;
-  unitFormat: SelectableValue<string>;
-}
-
-export const stateDefaults: DOTDiagramState = {
-  fontSize: fontSizes[0],
-  unitFormat: unitFormats[0]
-};

@@ -1,5 +1,5 @@
 import { PanelPlugin } from '@grafana/data';
-import { DOTDiagramOptions, defaults } from './types';
+import { DOTDiagramOptions, DOTDiagramDefaults } from './editorOptions';
 import { DOTDiagramEditor } from './DOTDiagramEditor';
 import { DOTDiagramPanel } from './DOTDiagramPanel';
 
@@ -10,4 +10,4 @@ loadPluginCss({
   light: 'plugins/briangann-dotdiagram-panel/styles/light.css',
 });
 
-export const plugin = new PanelPlugin<DOTDiagramOptions>(DOTDiagramPanel).setDefaults(defaults).setEditor(DOTDiagramEditor);
+export const plugin = new PanelPlugin<DOTDiagramOptions>(DOTDiagramPanel).setDefaults(DOTDiagramDefaults).setEditor(DOTDiagramEditor);

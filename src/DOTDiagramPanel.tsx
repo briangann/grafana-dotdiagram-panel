@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { PanelProps } from '@grafana/data';
-import { DOTDiagramOptions } from './types';
+import { DOTDiagramOptions } from './editorOptions';
 
 interface Props extends PanelProps<DOTDiagramOptions> {}
 
