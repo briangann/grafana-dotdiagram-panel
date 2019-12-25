@@ -1,5 +1,15 @@
 @import '../../node_modules/@grafana/toolkit/sass/_variables.scss';
 
+.labelcolor-input-color {
+  width: 42px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $input-bg;
+  border: 1px solid $input-label-border-color;
+}
+
 .node rect {
   cursor: move;
   fill-opacity: 0.9;
