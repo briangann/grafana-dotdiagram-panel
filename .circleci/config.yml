@@ -35,7 +35,7 @@ jobs:
         name: Run Toolkit Build
         command: npx grafana-toolkit plugin:ci-build
     - run:
-        name: Run frontend testss
+        name: Run coverage report
         command: |
           ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json coverage/frontend/lcov.info
     - persist_to_workspace:
@@ -54,11 +54,11 @@ jobs:
   upload_coverage:
     docker:
     - image: circleci/node:12
-      environment:
-        CC_TEST_REPORTER_ID: c0f70093a4f6c75306b5c415eac99767ee8746ac9e1931d03cb37e11233f6bce
+    #  environment:
+    #    CC_TEST_REPORTER_ID: c0f70093a4f6c75306b5c415eac99767ee8746ac9e1931d03cb37e11233f6bce
     steps:
       - attach_workspace:
-          at: ~/repo/plugin
+          at: ~/plugin
       - run:
           name: Upload coverage results to Code Climate
           command: |
