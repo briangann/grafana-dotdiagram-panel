@@ -22,14 +22,9 @@ jobs:
           mkdir -p tmp/
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
           chmod +x ./tmp/cc-test-reporter
-    #- persist_to_workspace:
-    #      root: tmp
-    #      paths:
-    #        - cc-test-reporter
     - run:
         name: Install Node packages
         command: |
-          # sudo npm install -g yarn --quiet
           yarn install --pure-lockfile
     - run:
         name: Run Toolkit Build
@@ -39,10 +34,6 @@ jobs:
         name: Run coverage report
         command: |
           ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json ci/jobs/build_plugin/coverage/lcov.info
-    #- persist_to_workspace:
-    #    root: tmp
-    #    paths:
-    #    - codeclimate.frontend.json
     - save_cache:
         paths:
         - node_modules
@@ -58,9 +49,10 @@ jobs:
     - image: circleci/node:12
     #  environment:
     #    CC_TEST_REPORTER_ID: c0f70093a4f6c75306b5c415eac99767ee8746ac9e1931d03cb37e11233f6bce
+    working_directory: ~/plugin
     steps:
       - attach_workspace:
-          at: ~/plugin
+          at: .
       - run:
           name: Upload coverage results to Code Climate
           command: |
