@@ -6,6 +6,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/fb9a3c26c28fbfea7da4/maintainability)](https://codeclimate.com/github/briangann/grafana-dotdiagram-panel/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fb9a3c26c28fbfea7da4/test_coverage)](https://codeclimate.com/github/briangann/grafana-dotdiagram-panel/test_coverage)
 
+NOTE: this is not ready for use!
 # Screenshots
 
 ![Panel Example](https://raw.githubusercontent.com/briangann/grafana-dotdiagram-panel/master/src/screenshots/panel-example.png)
