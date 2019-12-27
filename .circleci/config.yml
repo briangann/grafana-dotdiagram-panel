@@ -34,11 +34,12 @@ jobs:
     - run:
         name: Run Toolkit Build
         command: |
-         npx grafana-toolkit plugin:ci-build
-         ls -al
+          npx grafana-toolkit plugin:ci-build
+          ls -al
     - run:
         name: Run coverage report
         command: |
+          ls -al
           ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json coverage/frontend/lcov.info
     - persist_to_workspace:
         root: tmp
