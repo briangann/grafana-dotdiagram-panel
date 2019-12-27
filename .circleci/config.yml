@@ -17,15 +17,15 @@ jobs:
         keys:
         - yarn-packages-{{ checksum "yarn.lock" }}
     - run:
-          name:  Download cc-test-reporter
-          command: |
-            mkdir -p tmp/
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
-            chmod +x ./tmp/cc-test-reporter
-    - persist_to_workspace:
-          root: tmp
-          paths:
-            - cc-test-reporter
+        name:  Download cc-test-reporter
+        command: |
+          mkdir -p tmp/
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
+          chmod +x ./tmp/cc-test-reporter
+    #- persist_to_workspace:
+    #      root: tmp
+    #      paths:
+    #        - cc-test-reporter
     - run:
         name: Install Node packages
         command: |
@@ -38,14 +38,11 @@ jobs:
     - run:
         name: Run coverage report
         command: |
-          ls -al
-          ls -al ci
-          ls -al ci/jobs
           ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json ci/jobs/build_plugin/coverage/lcov.info
-    - persist_to_workspace:
-        root: tmp
-        paths:
-        - codeclimate.frontend.json
+    #- persist_to_workspace:
+    #    root: tmp
+    #    paths:
+    #    - codeclimate.frontend.json
     - save_cache:
         paths:
         - node_modules
@@ -54,10 +51,7 @@ jobs:
         root: .
         paths:
         - ci
-    - store_artifacts:
-        path: ci
-    - store_artifacts:
-        path: tmp
+        - tmp
 
   upload_coverage:
     docker:
@@ -70,6 +64,8 @@ jobs:
       - run:
           name: Upload coverage results to Code Climate
           command: |
+            ls -al
+            ls -al tmp
             ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 2 -o tmp/codeclimate.total.json
             ./tmp/cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
 
