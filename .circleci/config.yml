@@ -43,12 +43,14 @@ jobs:
         paths:
         - ci
         - tmp
+    - store_artifacts:
+        path: ci
 
   upload_coverage:
     docker:
     - image: circleci/node:12
     #  environment:
-    #    CC_TEST_REPORTER_ID: c0f70093a4f6c75306b5c415eac99767ee8746ac9e1931d03cb37e11233f6bce
+    #    CC_TEST_REPORTER_ID: add_this_to_circleci_config
     working_directory: ~/plugin
     steps:
       - attach_workspace:
@@ -56,10 +58,7 @@ jobs:
       - run:
           name: Upload coverage results to Code Climate
           command: |
-            ls -al
-            ls -al tmp
             ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.frontend.json -d -p 1 -o tmp/codeclimate.total.json
-            ls -al tmp
             ./tmp/cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
 
   build_docs:
