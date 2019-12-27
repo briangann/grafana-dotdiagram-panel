@@ -1,4 +1,4 @@
-describe('UTILS test', () => {
+describe('utils test', () => {
   const text = 'hello';
 
   it('should work', () => {

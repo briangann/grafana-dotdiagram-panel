@@ -1,4 +1,4 @@
-describe('module test', () => {
+describe('DOTDiagramPanel test', () => {
   const text = 'hello';
 
   it('should work', () => {

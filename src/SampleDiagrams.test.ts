@@ -1,4 +1,4 @@
-describe('module test', () => {
+describe('SampleDiagrams test', () => {
   const text = 'hello';
 
   it('should work', () => {

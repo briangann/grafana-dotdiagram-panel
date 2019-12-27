@@ -1,4 +1,4 @@
-describe('CUSTOMUID test', () => {
+describe('customuuid test', () => {
   const text = 'hello';
 
   it('should work', () => {
