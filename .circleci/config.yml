@@ -32,7 +32,8 @@ jobs:
           ./tmp/cc-test-reporter before-build
           npx grafana-toolkit plugin:ci-build
           # symlink to coverage
-          ln ci/jobs/build_plugin/coverage
+          ln -s ci/jobs/build_plugin/coverage
+          ls -al coverage
           ./tmp/cc-test-reporter after-build --debug --coverage-input-type lcov
           ls -al
           ls -al coverage
