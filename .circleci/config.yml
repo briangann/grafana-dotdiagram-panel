@@ -35,17 +35,17 @@ jobs:
         name: Run Toolkit Build
         command: |
           npx grafana-toolkit plugin:ci-build
-          ls -al
     - run:
         name: Run coverage report
         command: |
           ls -al
           ls -al ci
+          ls -al ci/jobs
           echo ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json coverage/frontend/lcov.info
-    - persist_to_workspace:
-        root: tmp
-        paths:
-        - codeclimate.frontend.json
+    #- persist_to_workspace:
+    #    root: tmp
+    #    paths:
+    #    - codeclimate.frontend.json
     - save_cache:
         paths:
         - node_modules
@@ -55,7 +55,7 @@ jobs:
         paths:
         - ci
     - store_artifacts:
-        path: ci/packages
+        path: ci
 
   upload_coverage:
     docker:
