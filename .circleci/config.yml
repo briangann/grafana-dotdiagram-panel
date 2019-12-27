@@ -33,7 +33,7 @@ jobs:
           npx grafana-toolkit plugin:ci-build
           # symlink to coverage
           ln ci/jobs/build_plugin/coverage
-          ./tmp/cc-test-reporter after-build --debug --coverage-input-type lcov --exit-code $?
+          ./tmp/cc-test-reporter after-build --debug --coverage-input-type lcov
           ls -al
           ls -al coverage
     #- run:
