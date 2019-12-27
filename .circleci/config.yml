@@ -36,7 +36,9 @@ jobs:
           ls -al coverage
           ./tmp/cc-test-reporter after-build --debug --coverage-input-type lcov
           ls -al
+          ls -al tmp
           ls -al coverage
+          sleep 30
     #- run:
     #    name: Run coverage report
     #    command: |
@@ -58,6 +60,10 @@ jobs:
         paths:
         - ci
         - tmp
+    - store_artifacts:
+        path: ci
+    - store_artifacts:
+        path: tmp
     #- store_test_results:
     #    path: test-results
 
