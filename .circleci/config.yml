@@ -17,6 +17,16 @@ jobs:
         keys:
         - yarn-packages-{{ checksum "yarn.lock" }}
     - run:
+          name:  Download cc-test-reporter
+          command: |
+            mkdir -p tmp/
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
+            chmod +x ./tmp/cc-test-reporter
+    - persist_to_workspace:
+          root: tmp
+          paths:
+            - cc-test-reporter
+    - run:
         name: Install Node packages
         command: |
           # sudo npm install -g yarn --quiet
@@ -24,6 +34,14 @@ jobs:
     - run:
         name: Run Toolkit Build
         command: npx grafana-toolkit plugin:ci-build
+    - run:
+        name: Run frontend testss
+        command: |
+          ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json coverage/frontend/lcov.info
+    - persist_to_workspace:
+        root: tmp
+        paths:
+        - codeclimate.frontend.json
     - save_cache:
         paths:
         - node_modules
@@ -32,6 +50,20 @@ jobs:
         root: .
         paths:
         - ci
+
+  upload_coverage:
+    docker:
+    - image: circleci/node:12
+      environment:
+        CC_TEST_REPORTER_ID: c0f70093a4f6c75306b5c415eac99767ee8746ac9e1931d03cb37e11233f6bce
+    steps:
+      - attach_workspace:
+          at: ~/repo/plugin
+      - run:
+          name: Upload coverage results to Code Climate
+          command: |
+            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 2 -o tmp/codeclimate.total.json
+            ./tmp/cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
 
   build_docs:
     docker:
@@ -184,6 +216,9 @@ workflows:
     jobs:
     - build_plugin
     - build_docs:
+        requires:
+        - build_plugin
+    - upload_coverage:
         requires:
         - build_plugin
     - package:
