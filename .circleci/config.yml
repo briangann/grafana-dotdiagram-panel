@@ -41,7 +41,7 @@ jobs:
           ls -al
           ls -al ci
           ls -al ci/jobs
-          echo ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json ci/jobs/build_plugin/coverage/lcov.info
+          ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json ci/jobs/build_plugin/coverage/lcov.info
     - persist_to_workspace:
         root: tmp
         paths:
