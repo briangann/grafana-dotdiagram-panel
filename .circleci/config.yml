@@ -58,7 +58,8 @@ jobs:
           command: |
             ls -al
             ls -al tmp
-            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 2 -o tmp/codeclimate.total.json
+            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.frontend.json -d -p 1 -o tmp/codeclimate.total.json
+            ls -al tmp
             ./tmp/cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
 
   build_docs:
