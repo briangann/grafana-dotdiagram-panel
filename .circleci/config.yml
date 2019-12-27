@@ -29,28 +29,19 @@ jobs:
     - run:
         name: Run Toolkit Build
         command: |
-          ./tmp/cc-test-reporter before-build
           npx grafana-toolkit plugin:ci-build
-          # symlink to coverage
-          ln -s ci/jobs/build_plugin/coverage
-          ls -al coverage
-          ./tmp/cc-test-reporter after-build --debug --coverage-input-type lcov
-          ls -al
-          ls -al tmp
-          ls -al coverage
-          sleep 30
-    #- run:
-    #    name: Run coverage report
-    #    command: |
-    #      ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json ci/jobs/build_plugin/coverage/lcov.info
-    #- run:
-    #    name: Install JUnit coverage reporter
-    #    command: sudo yarn global add jest
-    #- run:
-    #    name: Run tests with JUnit as reporter
-    #    command: jest --ci --runInBand --reporters=default --reporters=jest-junit
-    #    environment:
-    #      JEST_JUNIT_OUTPUT_DIR: "test-results/jest/results.xml"
+    - run:
+        name: Run coverage report
+        command: |
+          ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json ci/jobs/build_plugin/coverage/lcov.info
+    - run:
+        name: Install JUnit coverage reporter
+        command: sudo yarn global add jest
+    - run:
+        name: Run tests with JUnit as reporter
+        command: jest --ci --runInBand --reporters=default --reporters=jest-junit
+        environment:
+          JEST_JUNIT_OUTPUT_DIR: "test-results/jest/results.xml"
     - save_cache:
         paths:
         - node_modules
@@ -60,12 +51,8 @@ jobs:
         paths:
         - ci
         - tmp
-    - store_artifacts:
-        path: ci
-    - store_artifacts:
-        path: tmp
-    #- store_test_results:
-    #    path: test-results
+    - store_test_results:
+        path: test-results
 
   upload_coverage:
     docker:
