@@ -34,6 +34,14 @@ jobs:
         name: Run coverage report
         command: |
           ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json ci/jobs/build_plugin/coverage/lcov.info
+    - run:
+        name: Install JUnit coverage reporter
+        command: yarn add --dev jest-junit
+    - run:
+        name: Run tests with JUnit as reporter
+        command: jest --ci --runInBand --reporters=default --reporters=jest-junit
+        environment:
+          JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
     - save_cache:
         paths:
         - node_modules
@@ -45,6 +53,10 @@ jobs:
         - tmp
     - store_artifacts:
         path: ci
+    - store_artifacts:
+        path: reports
+    #- store_test_results:
+    #    path: test-results
 
   upload_coverage:
     docker:
