@@ -51,16 +51,12 @@ jobs:
         paths:
         - ci
         - tmp
-    - store_artifacts:
-        path: ci
-    - store_artifacts:
-        path: test-results
     - store_test_results:
         path: test-results
 
   upload_coverage:
     docker:
-    - image: circleci/node:12
+    - image:  circleci/circleci-cli:alpine
     #  environment:
     #    CC_TEST_REPORTER_ID: add_this_to_circleci_config
     working_directory: ~/plugin
@@ -232,6 +228,7 @@ workflows:
     - package:
         requires:
         - build_docs
+        - upload_coverage
     - test_6_5_2:
         requires:
         - package
