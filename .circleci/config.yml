@@ -40,7 +40,8 @@ jobs:
         name: Run coverage report
         command: |
           ls -al
-          ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json coverage/frontend/lcov.info
+          ls -al ci
+          echo ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json coverage/frontend/lcov.info
     - persist_to_workspace:
         root: tmp
         paths:
@@ -53,6 +54,8 @@ jobs:
         root: .
         paths:
         - ci
+    - store_artifacts:
+        path: ci/packages
 
   upload_coverage:
     docker:
