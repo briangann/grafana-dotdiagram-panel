@@ -1,4 +1,4 @@
-describe('Basic CTRL test', () => {
+describe('types test', () => {
   const text = 'hello';
 
   it('should work', () => {
