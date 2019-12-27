@@ -1,7 +1,6 @@
 import kbn from 'grafana/app/core/utils/kbn';
 import { SelectableValue } from '@grafana/data';
 
-
 export const fontSizes: Array<SelectableValue<string>> = [
   { value: '14', label: '14' },
   { value: '16', label: '16' },

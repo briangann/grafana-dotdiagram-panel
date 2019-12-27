@@ -1,4 +1,24 @@
 @import '../../node_modules/@grafana/toolkit/sass/_variables.scss';
+/*
+*[id^='chart-container'] text,
+title {
+  pointer-events: none;
+  fill: white;
+}
+*/
+*[id^='chart-container'] div {
+  fill: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+*[id^='chart-container'] svg,
+polygon {
+  align-items: center;
+  justify-content: center;
+  fill: transparent;
+}
 
 .labelcolor-input-color {
   width: 42px;

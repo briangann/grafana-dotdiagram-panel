@@ -14,11 +14,11 @@ export interface DOTDiagramOptions {
 export const DOTDiagramDefaults: DOTDiagramOptions = {
   edgeColor: edgeColorOptions[0],
   fontSize: fontSizes[0],
-  labelColor: "white",
+  labelColor: 'white',
   nodeAlignment: nodeAlignmentOptions[0],
   operator: operatorOptions[0],
   unitFormat: {
-    "text": "short",
-    "value": "short"
+    text: 'short',
+    value: 'short',
   },
 };
