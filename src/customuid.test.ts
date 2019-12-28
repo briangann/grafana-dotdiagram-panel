@@ -12,4 +12,7 @@ describe('customuuid test', () => {
   it('should generate an url', () => {
     expect(uid.toString()).toBe('url(http://localhost/#O-random_urlpath-1)');
   });
+  it('should return an url', () => {
+    expect(uid.getId()).toBe('O-random_urlpath-1');
+  });
 });
