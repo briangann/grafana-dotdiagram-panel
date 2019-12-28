@@ -1,7 +1,8 @@
-describe('module test', () => {
-  const text = 'hello';
+//import { plugin } from './module';
 
-  it('should work', () => {
-    expect(text).toBe('hello');
+describe('module test', () => {
+  it.skip('plugin should be defined', () => {
+    expect(true).toBeTruthy();
+    //expect(plugin).toBeDefined();
   });
 });

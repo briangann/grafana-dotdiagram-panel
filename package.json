@@ -29,10 +29,16 @@
     "@types/jquery": "^3.3.31",
     "@types/lodash": "^4.14.149",
     "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.4"
+    "@types/react-dom": "^16.9.4",
+    "babel-jest": "^24.9.0"
   },
   "dependencies": {
     "viz.js": "^2.1.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "grafana/app/core/utils/kbn": "<rootDir>/__mocks__/app/core/utils/kbn.ts"
+    }
   },
   "homepage": "https://github.com/briangann/grafana-dotdiagram-panel"
 }
