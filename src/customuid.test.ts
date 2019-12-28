@@ -15,4 +15,8 @@ describe('customuuid test', () => {
   it('should return an url', () => {
     expect(uid.getId()).toBe('O-random_urlpath-1');
   });
+  it('should return an url when passed a null name', () => {
+    const uid = new CustomUID(null);
+    expect(uid.getId()).toBe('O-2');
+  });
 });
