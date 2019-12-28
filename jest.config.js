@@ -4,7 +4,6 @@ module.exports = {
       "^.+\\.tsx?$": "ts-jest",
       "^.+\\.js$": "./node_modules/babel-jest"
     },
-    "testRegex": "(\\.|/)(spec|test|jest)\\.(jsx?|tsx?)$",
     "roots": [
       "src"
     ],  
@@ -19,5 +18,12 @@ module.exports = {
       "jsx",
       "json",
       "node"
+    ],
+    coverageReporters: ['json-summary', 'text', 'lcov'],
+    collectCoverageFrom: ['src/**/*.{ts,tsx}', '!**/node_modules/**', '!**/vendor/**'],
+    testMatch: [
+      '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
+      '<rootDir>/src/**/*.{spec,test,jest}.{js,jsx,ts,tsx}',
+      '<rootDir>/spec/**/*.{spec,test,jest}.{js,jsx,ts,tsx}',
     ]
 };

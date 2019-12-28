@@ -1,0 +1,204 @@
+import React from "react";
+//import * as d3 from "../lib/d3.v5.min";
+import { select as d3_select} from "d3-selection";
+import { selectAll as d3_selectAll} from "d3-selection";
+import { transition as d3_transition} from "d3-transition";
+import { zoomIdentity as d3_zoomIdentity} from "d3-zoom";
+import { zoomTransform as d3_zoomTransform} from "d3-zoom";
+import "../libs/viz211.js";
+//import "d3-graphviz";
+
+import _ from "lodash";
+import { any } from "prop-types";
+export interface Props2 {
+  chartContainer: any;
+}
+
+class DOTDiagram2 extends React.Component<any, any, Props2> {
+  state: {
+    containerHeight: number,
+    containerWidth: number,
+    chart: any;
+  };
+  svg: any;
+  graph0: any;
+  color: any;
+  div: any;
+  worker: Worker;
+  graphviz: any;
+  prevFit: any;
+  prevEngine: any;
+  prevDotSrc: string;
+  drawnNodeName: string;
+  renderGraphReady: boolean;
+  rendering: boolean;
+  pendingUpdate: boolean;
+  originalViewBox: any;
+  selectedComponents: any;
+  constructor(props) {
+    super(props);
+    this.svg = null;
+    this.state = {
+      containerHeight: this.props.chartContainer.clientHeight,
+      containerWidth: this.props.chartContainer.clientWidth,
+      chart: null,
+    };
+    this.svg = d3_select(null);
+    this.createGraph = this.createGraph.bind(this);
+    this.renderGraph = this.renderGraph.bind(this);
+    this.prevFit = null;
+    this.prevEngine = null;
+    this.prevDotSrc = "";
+    this.drawnNodeName = null;
+    this.renderGraphReady = false;
+    this.rendering = false;
+    this.pendingUpdate = false;
+    this.originalViewBox = null;
+    this.graph0 = null;
+    this.selectedComponents = d3_selectAll(null);
+
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <React.Fragment>
+        <div ref={div => this.div = d3_select(div)}/>
+      </React.Fragment>
+    );
+  }
+
+  componentDidMount() {
+    this.createGraph();
+  }
+
+  componentDidUpdate() {
+    this.renderGraph();
+  }
+
+  handleError(errorMessage) {
+    let line = errorMessage.replace(/.*error in line ([0-9]*) .*\n/, "$1");
+    this.props.onError({message: errorMessage, line: line});
+  }
+  getSvg = () => {
+    return this.svg.node();
+  }
+
+  createGraph() {
+    //this.graphviz = this.div.graphviz()
+    //  .onerror(this.handleError.bind(this))
+    //  .on("initEnd", () => this.renderGraph.call(this));
+    this.props.registerGetSvg(this.getSvg);
+  }
+
+  renderGraph() {
+    let width = this.div.node().parentElement.clientWidth;
+    let height = this.div.node().parentElement.clientHeight;
+    let fit = this.props.fit;
+    let engine = this.props.engine;
+    if (this.props.dotSrc.length === 0) {
+      this.svg.remove();
+      this.svg = d3_select(null);
+      this.props.onError(null);
+      this.renderGraphReady = false;
+      return;
+    }
+    if (this.props.dotSrc === this.prevDotSrc && this.props.engine === this.prevEngine) {
+      return;
+    }
+    if (this.rendering) {
+        this.pendingUpdate = true;
+        return;
+    }
+    if (this.props.fit !== this.prevFit) {
+      if (this.renderGraphReady) {
+        if (this.prevFit) {
+          this.unFitGraph();
+          this.setZoomScale(1, true);
+        } else {
+          this.setZoomScale(1, false, true);
+          this.fitGraph();
+        }
+      }
+      this.prevFit = this.props.fit;
+    }
+    this.prevDotSrc = this.props.dotSrc;
+    this.prevEngine = this.props.engine;
+    this.rendering = true;
+    this.setState({busy: true});
+    this.graphviz
+      .width(width)
+      .height(height)
+      .engine(engine)
+      .fit(fit)
+      .tweenPaths(this.props.tweenPaths)
+      .tweenShapes(this.props.tweenShapes)
+      .tweenPrecision(this.props.tweenPrecision)
+      .dot(this.props.dotSrc, this.handleDotLayoutReady.bind(this))
+      .render(this.handleRenderGraphReady.bind(this));
+  }
+  unFitGraph() {
+    let width = this.div.node().parentElement.clientWidth;
+    let height = this.div.node().parentElement.clientHeight;
+    this.svg
+      .attr("viewBox", `0 0 ${width * 3 / 4} ${height * 3 / 4}`);
+  }
+
+  fitGraph() {
+    this.svg
+      .attr("viewBox", `0 0 ${this.originalViewBox.width} ${this.originalViewBox.height}`);
+  }
+  setZoomScale = (scale, center = false, reset = false) => {
+    let viewBox = this.svg.attr("viewBox").split(" ");
+    let bbox = this.graph0.node().getBBox();
+    let {x, y, k} = d3_zoomTransform(this.graphviz.zoomSelection().node());
+    let [x0, y0, scale0] = [x, y, k];
+    let xOffset0 = x0 + bbox.x * scale0;
+    let yOffset0 = y0 + bbox.y * scale0;
+    let xCenter = viewBox[2] / 2;
+    let yCenter = viewBox[3] / 2;
+    let xOffset;
+    let yOffset;
+    if (center) {
+      xOffset = (viewBox[2] - bbox.width * scale) / 2;
+      yOffset = (viewBox[3] - bbox.height * scale) / 2;
+    } else if (reset) {
+      xOffset = 0;
+      yOffset = 0;
+    } else {
+      xOffset = xCenter - (xCenter - xOffset0) * scale / scale0;
+      yOffset = yCenter - (yCenter - yOffset0) * scale / scale0;
+    }
+    x = -bbox.x * scale + xOffset;
+    y = -bbox.y * scale + yOffset;
+    let transform = d3_zoomIdentity.translate(x, y).scale(scale);
+    this.graphviz.zoomSelection().call(this.graphviz.zoomBehavior().transform, transform);
+  }
+
+  handleDotLayoutReady() {
+    let [, , width, height] = this.graphviz.data().attributes.viewBox.split(" ");
+    this.originalViewBox = {width, height};
+  }
+
+  handleRenderGraphReady() {
+    this.svg = this.div.selectWithoutDataPropagation("svg");
+    this.graph0 = this.svg.selectWithoutDataPropagation("g");
+    //this.dotGraph = this.prevDotGraph;
+    //this.addEventHandlers();
+    this.rendering = false;
+    this.setState({busy: false});
+    if (!this.renderGraphReady) {
+      this.renderGraphReady = true;
+      this.setZoomScale(1, true);
+      this.graphviz
+        .transition(() => d3_transition().duration(this.props.transitionDuration * 1000));
+      this.props.onInitialized();
+    }
+    if (this.pendingUpdate) {
+      this.pendingUpdate = false;
+      this.renderGraph();
+    }
+  }
+}
+
+export default DOTDiagram2;
