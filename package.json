@@ -35,5 +35,10 @@
   "dependencies": {
     "viz.js": "^2.1.2"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "grafana/app/core/utils/kbn": "<rootDir>/__mocks__/app/core/utils/kbn.ts"
+    }
+  },
   "homepage": "https://github.com/briangann/grafana-dotdiagram-panel"
 }

@@ -1,0 +1,290 @@
+const kbn: any = {};
+
+kbn.valueFormats = {};
+///// FORMAT MENU /////
+
+kbn.getUnitFormats = () => {
+  return [
+    {
+      text: 'none',
+      submenu: [
+        { text: 'none', value: 'none' },
+        { text: 'short', value: 'short' },
+        { text: 'percent (0-100)', value: 'percent' },
+        { text: 'percent (0.0-1.0)', value: 'percentunit' },
+        { text: 'Humidity (%H)', value: 'humidity' },
+        { text: 'decibel', value: 'dB' },
+        { text: 'hexadecimal (0x)', value: 'hex0x' },
+        { text: 'hexadecimal', value: 'hex' },
+        { text: 'scientific notation', value: 'sci' },
+        { text: 'locale format', value: 'locale' },
+      ],
+    },
+    {
+      text: 'currency',
+      submenu: [
+        { text: 'Dollars ($)', value: 'currencyUSD' },
+        { text: 'Pounds (£)', value: 'currencyGBP' },
+        { text: 'Euro (€)', value: 'currencyEUR' },
+        { text: 'Yen (¥)', value: 'currencyJPY' },
+        { text: 'Rubles (₽)', value: 'currencyRUB' },
+        { text: 'Hryvnias (₴)', value: 'currencyUAH' },
+        { text: 'Real (R$)', value: 'currencyBRL' },
+        { text: 'Danish Krone (kr)', value: 'currencyDKK' },
+        { text: 'Icelandic Króna (kr)', value: 'currencyISK' },
+        { text: 'Norwegian Krone (kr)', value: 'currencyNOK' },
+        { text: 'Swedish Krona (kr)', value: 'currencySEK' },
+        { text: 'Czech koruna (czk)', value: 'currencyCZK' },
+        { text: 'Swiss franc (CHF)', value: 'currencyCHF' },
+        { text: 'Polish Złoty (PLN)', value: 'currencyPLN' },
+        { text: 'Bitcoin (฿)', value: 'currencyBTC' },
+      ],
+    },
+    {
+      text: 'time',
+      submenu: [
+        { text: 'Hertz (1/s)', value: 'hertz' },
+        { text: 'nanoseconds (ns)', value: 'ns' },
+        { text: 'microseconds (µs)', value: 'µs' },
+        { text: 'milliseconds (ms)', value: 'ms' },
+        { text: 'seconds (s)', value: 's' },
+        { text: 'minutes (m)', value: 'm' },
+        { text: 'hours (h)', value: 'h' },
+        { text: 'days (d)', value: 'd' },
+        { text: 'duration (ms)', value: 'dtdurationms' },
+        { text: 'duration (s)', value: 'dtdurations' },
+        { text: 'duration (hh:mm:ss)', value: 'dthms' },
+        { text: 'Timeticks (s/100)', value: 'timeticks' },
+      ],
+    },
+    {
+      text: 'date & time',
+      submenu: [
+        { text: 'YYYY-MM-DD HH:mm:ss', value: 'dateTimeAsIso' },
+        { text: 'DD/MM/YYYY h:mm:ss a', value: 'dateTimeAsUS' },
+        { text: 'From Now', value: 'dateTimeFromNow' },
+      ],
+    },
+    {
+      text: 'data (IEC)',
+      submenu: [
+        { text: 'bits', value: 'bits' },
+        { text: 'bytes', value: 'bytes' },
+        { text: 'kibibytes', value: 'kbytes' },
+        { text: 'mebibytes', value: 'mbytes' },
+        { text: 'gibibytes', value: 'gbytes' },
+      ],
+    },
+    {
+      text: 'data (Metric)',
+      submenu: [
+        { text: 'bits', value: 'decbits' },
+        { text: 'bytes', value: 'decbytes' },
+        { text: 'kilobytes', value: 'deckbytes' },
+        { text: 'megabytes', value: 'decmbytes' },
+        { text: 'gigabytes', value: 'decgbytes' },
+      ],
+    },
+    {
+      text: 'data rate',
+      submenu: [
+        { text: 'packets/sec', value: 'pps' },
+        { text: 'bits/sec', value: 'bps' },
+        { text: 'bytes/sec', value: 'Bps' },
+        { text: 'kilobits/sec', value: 'Kbits' },
+        { text: 'kilobytes/sec', value: 'KBs' },
+        { text: 'megabits/sec', value: 'Mbits' },
+        { text: 'megabytes/sec', value: 'MBs' },
+        { text: 'gigabytes/sec', value: 'GBs' },
+        { text: 'gigabits/sec', value: 'Gbits' },
+      ],
+    },
+    {
+      text: 'hash rate',
+      submenu: [
+        { text: 'hashes/sec', value: 'Hs' },
+        { text: 'kilohashes/sec', value: 'KHs' },
+        { text: 'megahashes/sec', value: 'MHs' },
+        { text: 'gigahashes/sec', value: 'GHs' },
+        { text: 'terahashes/sec', value: 'THs' },
+        { text: 'petahashes/sec', value: 'PHs' },
+        { text: 'exahashes/sec', value: 'EHs' },
+      ],
+    },
+    {
+      text: 'throughput',
+      submenu: [
+        { text: 'ops/sec (ops)', value: 'ops' },
+        { text: 'requests/sec (rps)', value: 'reqps' },
+        { text: 'reads/sec (rps)', value: 'rps' },
+        { text: 'writes/sec (wps)', value: 'wps' },
+        { text: 'I/O ops/sec (iops)', value: 'iops' },
+        { text: 'ops/min (opm)', value: 'opm' },
+        { text: 'reads/min (rpm)', value: 'rpm' },
+        { text: 'writes/min (wpm)', value: 'wpm' },
+      ],
+    },
+    {
+      text: 'length',
+      submenu: [
+        { text: 'millimetre (mm)', value: 'lengthmm' },
+        { text: 'meter (m)', value: 'lengthm' },
+        { text: 'feet (ft)', value: 'lengthft' },
+        { text: 'kilometer (km)', value: 'lengthkm' },
+        { text: 'mile (mi)', value: 'lengthmi' },
+      ],
+    },
+    {
+      text: 'area',
+      submenu: [
+        { text: 'Square Meters (m²)', value: 'areaM2' },
+        { text: 'Square Feet (ft²)', value: 'areaF2' },
+        { text: 'Square Miles (mi²)', value: 'areaMI2' },
+      ],
+    },
+    {
+      text: 'mass',
+      submenu: [
+        { text: 'milligram (mg)', value: 'massmg' },
+        { text: 'gram (g)', value: 'massg' },
+        { text: 'kilogram (kg)', value: 'masskg' },
+        { text: 'metric ton (t)', value: 'masst' },
+      ],
+    },
+    {
+      text: 'velocity',
+      submenu: [
+        { text: 'metres/second (m/s)', value: 'velocityms' },
+        { text: 'kilometers/hour (km/h)', value: 'velocitykmh' },
+        { text: 'miles/hour (mph)', value: 'velocitymph' },
+        { text: 'knot (kn)', value: 'velocityknot' },
+      ],
+    },
+    {
+      text: 'volume',
+      submenu: [
+        { text: 'millilitre (mL)', value: 'mlitre' },
+        { text: 'litre (L)', value: 'litre' },
+        { text: 'cubic metre', value: 'm3' },
+        { text: 'Normal cubic metre', value: 'Nm3' },
+        { text: 'cubic decimetre', value: 'dm3' },
+        { text: 'gallons', value: 'gallons' },
+      ],
+    },
+    {
+      text: 'energy',
+      submenu: [
+        { text: 'Watt (W)', value: 'watt' },
+        { text: 'Kilowatt (kW)', value: 'kwatt' },
+        { text: 'Milliwatt (mW)', value: 'mwatt' },
+        { text: 'Watt per square metre (W/m²)', value: 'Wm2' },
+        { text: 'Volt-ampere (VA)', value: 'voltamp' },
+        { text: 'Kilovolt-ampere (kVA)', value: 'kvoltamp' },
+        { text: 'Volt-ampere reactive (var)', value: 'voltampreact' },
+        { text: 'Kilovolt-ampere reactive (kvar)', value: 'kvoltampreact' },
+        { text: 'Watt-hour (Wh)', value: 'watth' },
+        { text: 'Kilowatt-hour (kWh)', value: 'kwatth' },
+        { text: 'Kilowatt-min (kWm)', value: 'kwattm' },
+        { text: 'Joule (J)', value: 'joule' },
+        { text: 'Electron volt (eV)', value: 'ev' },
+        { text: 'Ampere (A)', value: 'amp' },
+        { text: 'Kiloampere (kA)', value: 'kamp' },
+        { text: 'Milliampere (mA)', value: 'mamp' },
+        { text: 'Volt (V)', value: 'volt' },
+        { text: 'Kilovolt (kV)', value: 'kvolt' },
+        { text: 'Millivolt (mV)', value: 'mvolt' },
+        { text: 'Decibel-milliwatt (dBm)', value: 'dBm' },
+        { text: 'Ohm (Ω)', value: 'ohm' },
+        { text: 'Lumens (Lm)', value: 'lumens' },
+      ],
+    },
+    {
+      text: 'temperature',
+      submenu: [
+        { text: 'Celsius (°C)', value: 'celsius' },
+        { text: 'Farenheit (°F)', value: 'farenheit' },
+        { text: 'Kelvin (K)', value: 'kelvin' },
+      ],
+    },
+    {
+      text: 'pressure',
+      submenu: [
+        { text: 'Millibars', value: 'pressurembar' },
+        { text: 'Bars', value: 'pressurebar' },
+        { text: 'Kilobars', value: 'pressurekbar' },
+        { text: 'Hectopascals', value: 'pressurehpa' },
+        { text: 'Kilopascals', value: 'pressurekpa' },
+        { text: 'Inches of mercury', value: 'pressurehg' },
+        { text: 'PSI', value: 'pressurepsi' },
+      ],
+    },
+    {
+      text: 'force',
+      submenu: [
+        { text: 'Newton-meters (Nm)', value: 'forceNm' },
+        { text: 'Kilonewton-meters (kNm)', value: 'forcekNm' },
+        { text: 'Newtons (N)', value: 'forceN' },
+        { text: 'Kilonewtons (kN)', value: 'forcekN' },
+      ],
+    },
+    {
+      text: 'flow',
+      submenu: [
+        { text: 'Gallons/min (gpm)', value: 'flowgpm' },
+        { text: 'Cubic meters/sec (cms)', value: 'flowcms' },
+        { text: 'Cubic feet/sec (cfs)', value: 'flowcfs' },
+        { text: 'Cubic feet/min (cfm)', value: 'flowcfm' },
+        { text: 'Litre/hour', value: 'litreh' },
+        { text: 'Litre/min (l/min)', value: 'flowlpm' },
+        { text: 'milliLitre/min (mL/min)', value: 'flowmlpm' },
+      ],
+    },
+    {
+      text: 'angle',
+      submenu: [
+        { text: 'Degrees (°)', value: 'degree' },
+        { text: 'Radians', value: 'radian' },
+        { text: 'Gradian', value: 'grad' },
+      ],
+    },
+    {
+      text: 'acceleration',
+      submenu: [
+        { text: 'Meters/sec²', value: 'accMS2' },
+        { text: 'Feet/sec²', value: 'accFS2' },
+        { text: 'G unit', value: 'accG' },
+      ],
+    },
+    {
+      text: 'radiation',
+      submenu: [
+        { text: 'Becquerel (Bq)', value: 'radbq' },
+        { text: 'curie (Ci)', value: 'radci' },
+        { text: 'Gray (Gy)', value: 'radgy' },
+        { text: 'rad', value: 'radrad' },
+        { text: 'Sievert (Sv)', value: 'radsv' },
+        { text: 'rem', value: 'radrem' },
+        { text: 'Exposure (C/kg)', value: 'radexpckg' },
+        { text: 'roentgen (R)', value: 'radr' },
+        { text: 'Sievert/hour (Sv/h)', value: 'radsvh' },
+      ],
+    },
+    {
+      text: 'concentration',
+      submenu: [
+        { text: 'parts-per-million (ppm)', value: 'ppm' },
+        { text: 'parts-per-billion (ppb)', value: 'conppb' },
+        { text: 'nanogram per cubic metre (ng/m³)', value: 'conngm3' },
+        { text: 'nanogram per normal cubic metre (ng/Nm³)', value: 'conngNm3' },
+        { text: 'microgram per cubic metre (μg/m³)', value: 'conμgm3' },
+        { text: 'microgram per normal cubic metre (μg/Nm³)', value: 'conμgNm3' },
+        { text: 'milligram per cubic metre (mg/m³)', value: 'conmgm3' },
+        { text: 'milligram per normal cubic metre (mg/Nm³)', value: 'conmgNm3' },
+        { text: 'gram per cubic metre (g/m³)', value: 'congm3' },
+        { text: 'gram per normal cubic metre (g/Nm³)', value: 'congNm3' },
+      ],
+    },
+  ];
+};
+
+export default kbn;

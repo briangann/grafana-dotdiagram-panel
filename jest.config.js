@@ -5,8 +5,9 @@ module.exports = {
       "^.+\\.js$": "./node_modules/babel-jest"
     },
     "roots": [
-      "src"
-    ],  
+      "src",
+      "tests"
+    ],
     "moduleDirectories": [
       "node_modules",
       "src",
@@ -21,6 +22,9 @@ module.exports = {
     ],
     coverageReporters: ['json-summary', 'text', 'lcov'],
     collectCoverageFrom: ['src/**/*.{ts,tsx}', '!**/node_modules/**', '!**/vendor/**'],
+    moduleNameMapper: {
+      "grafana/app/core/utils/kbn": "<rootDir>/__mocks__/app/core/utils/kbn.ts",
+    },
     testMatch: [
       '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
       '<rootDir>/src/**/*.{spec,test,jest}.{js,jsx,ts,tsx}',
